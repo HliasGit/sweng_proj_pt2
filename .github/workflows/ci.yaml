@@ -15,8 +15,6 @@ jobs:
       uses: jwlawson/actions-setup-cmake@v1
 
   test:
-    - runs-on: ubuntu-latest
-    
     - shell: bash 
     - name: Build project
       run: ./build.sh
