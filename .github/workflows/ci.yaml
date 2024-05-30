@@ -1,6 +1,5 @@
 name: C++ CI
 
-Copy code
 # on the following actions perform the specified operations
 on: [push]
 
