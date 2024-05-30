@@ -14,7 +14,6 @@ jobs:
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v1
 
-    - shell: bash 
     - name: Build project
       run: |
         ./build.sh
