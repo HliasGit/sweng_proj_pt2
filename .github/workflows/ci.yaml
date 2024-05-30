@@ -10,6 +10,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: true  # Ensure submodules are checked out
 
     - name: Install dependencies
       run: |
@@ -28,6 +30,7 @@ jobs:
       run: |
         cd build
         ./test_multiplication
+
 
     # - name: Configure CMake
     #   run: cmake -S . -B build
