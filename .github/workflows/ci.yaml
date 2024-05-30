@@ -21,7 +21,6 @@ jobs:
     - name: Run tests inside the build folder
       run: |
         cd build
-      run: |
         ./test_multiplication
 
     # - name: Configure CMake
