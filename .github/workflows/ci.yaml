@@ -14,14 +14,16 @@ jobs:
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v1
 
-  test:
     - shell: bash 
     - name: Build project
-      run: ./build.sh
+      run: |
+        ./build.sh
     
     - name: Run tests inside the build folder
-      run: cd build
-      run: ./test_multiplication
+      run: |
+        cd build
+      run: |
+        ./test_multiplication
 
     # - name: Configure CMake
     #   run: cmake -S . -B build
