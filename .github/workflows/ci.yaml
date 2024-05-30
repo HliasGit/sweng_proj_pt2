@@ -1,5 +1,6 @@
 name: C++ CI
 
+Copy code
 # on the following actions perform the specified operations
 on: [push]
 
@@ -11,11 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mpich
+
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v1
 
     - name: Build project
       run: |
+        chmod +x ./build.sh
         ./build.sh
     
     - name: Run tests inside the build folder
