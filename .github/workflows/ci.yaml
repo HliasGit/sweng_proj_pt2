@@ -29,6 +29,7 @@ jobs:
     
     - name: Run tests inside the build folder
       run: |
+        cd project/build
         ./test_multiplication
 
     - name: Install Singularity
