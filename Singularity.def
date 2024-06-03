@@ -2,9 +2,8 @@ Bootstrap: docker
 From: ubuntu:22.04
 
 %post
-    cd $HOME
     # Set noninteractive mode for apt-get
-    #this avoids installing tzdata, which shoould not be useful for us
+    #this avoids installing tzdata, which is not useful for us
     export DEBIAN_FRONTEND=noninteractive
 
     # Update the package list and install dependencies
@@ -16,24 +15,24 @@ From: ubuntu:22.04
         
     
     # clone the repository containing the project inside the container
-    git clone --recursive https://github.com/HliasGit/sweng_proj_pt2.git
-    cd sweng_proj_pt2/project/googletest
+    git clone --recursive https://github.com/HliasGit/sweng_proj_pt2.git /usr/sweng_proj_pt2
+    cd /usr/sweng_proj_pt2/project/googletest
     mkdir build
     cd build
     cmake ..
     make
     make install
 
-    cd $HOME/sweng_proj_pt2/project
+    cd /usr/sweng_proj_pt2/project
     rm -rf build
     chmod +x build.sh
     ./build.sh
 
 %test
-    cd $HOME/sweng_proj_pt2/project/build
+    cd /usr/sweng_proj_pt2/project/build
     mpirun -np 2 ./test_multiplication
 
 %runscript
-    cd $HOME/sweng_proj_pt2/project/build
+    cd /usr/sweng_proj_pt2/project/
     # Define the default command to run when the container starts
-    exec test_multiplication
+    mpirun -np 2 build/test_multiplication
