@@ -13,6 +13,10 @@ From: ubuntu:20.04
         mpich \
         git 
         
+    
+    # clone the repository containing the project inside the container
+    git clone https://github.com/HliasGit/sweng_proj_pt2.git
+
     # Install GoogleTest
     cd /opt
     git clone https://github.com/google/googletest.git
@@ -23,15 +27,19 @@ From: ubuntu:20.04
     make
     make install
 
-    # clone the repository containing the project inside the container
-    git clone https://github.com/HliasGit/sweng_proj_pt2.git
+    cd ../../..
+
 
 %environment
     # Set environment variables
     export PATH=/usr/local/bin:$PATH
+    export OPT_DIR=/opt
 
 %post
-    # Build the project inside the container
+    echo "Current directory before building the project:"
+    pwd
+    echo "List all folders at this location"
+    ls -l
     cd sweng_proj_pt2/project
     rm -rf build
     chmod +x build.sh
@@ -40,6 +48,10 @@ From: ubuntu:20.04
 %test
     # Test the built project, ths may not be needed, since the tests should
     # regard the container itself, not the programs inside it
+    echo "Current directory before running the test:"
+    pwd
+    echo "List all folders at this location"
+    ls -l
     cd sweng_proj_pt2/project/build
     mpirun -np 2 ./test_multiplication
 
