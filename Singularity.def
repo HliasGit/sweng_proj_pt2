@@ -33,25 +33,14 @@ From: ubuntu:20.04
 %environment
     # Set environment variables
     export PATH=/usr/local/bin:$PATH
-    export OPT_DIR=/opt
 
 %post
-    echo "Current directory before building the project:"
-    pwd
-    echo "List all folders at this location"
-    ls -l
     cd sweng_proj_pt2/project
     rm -rf build
     chmod +x build.sh
     ./build.sh
 
 %test
-    # Test the built project, ths may not be needed, since the tests should
-    # regard the container itself, not the programs inside it
-    echo "Current directory before running the test:"
-    pwd
-    echo "List all folders at this location"
-    ls -l
     cd sweng_proj_pt2/project/build
     mpirun -np 2 ./test_multiplication
 
