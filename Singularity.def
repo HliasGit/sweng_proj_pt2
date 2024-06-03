@@ -40,9 +40,9 @@ From: ubuntu:20.04
 %test
     # Test the built project, ths may not be needed, since the tests should
     # regard the container itself, not the programs inside it
-    cd /project/build
+    cd sweng_proj_pt2/project/build
     mpirun -np 2 ./test_multiplication
 
 %runscript
     # Define the default command to run when the container starts
-    exec /project/build/test_multiplication
+    exec sweng_proj_pt2/project/build/test_multiplication
