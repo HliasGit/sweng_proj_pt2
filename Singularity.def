@@ -34,6 +34,7 @@ From: ubuntu:20.04
 %post
     # Build the project inside the container
     cd /project
+    rm -rf build
     chmod +x build.sh
     ./build.sh
 
