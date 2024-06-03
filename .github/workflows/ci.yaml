@@ -46,9 +46,9 @@ jobs:
             git \
             cryptsetup
 
-        export VERSION=4.1.3 && # adjust this as necessary \
+        export VERSION=3.8.7 && # adjust this as necessary \
         wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
-        && tar -xzf singularity-${VERSION}.tar.gz \
+        && sudo tar -xzf singularity-${VERSION}.tar.gz \
         && cd singularity-${VERSION} \
         && ./mconfig \
         && make -C builddir \

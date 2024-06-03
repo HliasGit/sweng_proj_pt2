@@ -38,9 +38,10 @@ From: ubuntu:20.04
     ./build.sh
 
 %test
-    # Test the built project
+    # Test the built project, ths may not be needed, since the tests should
+    # regard the container itself, not the programs inside it
     cd /project/build
-    mpirun -np 4 ./test_multiplication
+    mpirun -np 2 ./test_multiplication
 
 %runscript
     # Define the default command to run when the container starts
