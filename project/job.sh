@@ -8,4 +8,4 @@
 #SBATCH --partition=gll_usr_prod                                           # partition
 #SBATCH --account=a08trb66                                            # project account
 
-srun singularity run ../my_project.sif
+singularity run ../my_project.sif

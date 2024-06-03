@@ -35,4 +35,4 @@ From: ubuntu:22.04
 %runscript
     cd /usr/sweng_proj_pt2/project/
     # Define the default command to run when the container starts
-    mpirun -np 2 build/test_multiplication
+    mpirun -np 2 build/main

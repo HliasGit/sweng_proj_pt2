@@ -16,7 +16,17 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y mpich
+        sudo apt-get install -y mpich \
+        build-essential \
+            uuid-dev \
+            libgpgme-dev \
+            squashfs-tools \
+            libseccomp-dev \
+            wget \
+            pkg-config \
+            git \
+            cryptsetup \
+            sshpass 
 
     - name: Setup CMake
       uses: jwlawson/actions-setup-cmake@v1
@@ -35,17 +45,6 @@ jobs:
 
     - name: Install Singularity
       run: |
-        sudo apt-get update && sudo apt-get install -y \
-            build-essential \
-            uuid-dev \
-            libgpgme-dev \
-            squashfs-tools \
-            libseccomp-dev \
-            wget \
-            pkg-config \
-            git \
-            cryptsetup
-
         export VERSION=3.8.7 && # adjust this as necessary \
         wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
         && sudo tar -xzf singularity-${VERSION}.tar.gz \
@@ -57,6 +56,11 @@ jobs:
     - name: Build Singularity container
       run: |
         sudo singularity build my_project.sif Singularity.def
+
+    - name: Connect to Galileo via ssh
+      run: |
+        sshpass -p "${{secrets.galileo}}" ssh a08trb66@login.g100.cineca.it 
+        ls
 
 
 
