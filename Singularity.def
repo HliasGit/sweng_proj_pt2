@@ -23,9 +23,8 @@ From: ubuntu:20.04
     make
     make install
 
-%files
-    # Copy the local project directory to /project in the container
-    project /project
+    # clone the repository containing the project inside the container
+    git clone https://github.com/HliasGit/sweng_proj_pt2.git
 
 %environment
     # Set environment variables
