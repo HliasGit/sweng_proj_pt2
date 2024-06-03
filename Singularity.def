@@ -27,7 +27,7 @@ From: ubuntu:22.04
     make
     make install
 
-    cd ../../..
+    cd 
 
 %environment
     # Set environment variables
