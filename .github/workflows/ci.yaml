@@ -57,10 +57,12 @@ jobs:
       run: |
         sudo singularity build my_project.sif Singularity.def
 
-    - name: Connect to Galileo via ssh
+    
+    - name: SSH to remote server
+      env:
+        SSHPASS: ${{ secrets.galileo}}
       run: |
-        sshpass -p "${{secrets.galileo}}" ssh -tt a08trb66@login.g100.cineca.it 
-        ls
+        sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it
 
 
 
