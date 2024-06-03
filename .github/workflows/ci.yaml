@@ -50,8 +50,8 @@ jobs:
         wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
         && sudo tar -xzf singularity-${VERSION}.tar.gz \
         && cd singularity-${VERSION} \
-        && ./mconfig \
-        && make -C builddir \
+        && sudo ./mconfig \
+        && sudo make -C builddir \
         && sudo make -C builddir install
 
     - name: Build Singularity container
