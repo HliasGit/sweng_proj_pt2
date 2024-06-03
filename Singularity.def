@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:20.04
+From: ubuntu:22.04
 
 %post
     # Set noninteractive mode for apt-get
@@ -29,7 +29,6 @@ From: ubuntu:20.04
 
     cd ../../..
 
-
 %environment
     # Set environment variables
     export PATH=/usr/local/bin:$PATH
@@ -46,4 +45,4 @@ From: ubuntu:20.04
 
 %runscript
     # Define the default command to run when the container starts
-    exec sweng_proj_pt2/project/build/test_multiplication
+    exec project/build/test_multiplication
