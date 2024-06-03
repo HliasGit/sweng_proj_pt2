@@ -59,7 +59,7 @@ jobs:
 
     - name: Connect to Galileo via ssh
       run: |
-        sshpass -p "${{secrets.galileo}}" ssh a08trb66@login.g100.cineca.it 
+        sshpass -p "${{secrets.galileo}}" ssh -tt a08trb66@login.g100.cineca.it 
         ls
 
 
