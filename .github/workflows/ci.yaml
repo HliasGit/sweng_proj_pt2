@@ -122,6 +122,7 @@ jobs:
         touch ~/.ssh/known_hosts
         ssh-keyscan -t rsa login.g100.cineca.it >> ~/.ssh/known_hosts
         sshpass -e scp my_project.sif a08trb66@login.g100.cineca.it:cluster_project.sif
+        ssh-keygen -f "~/.ssh/known_hosts" -R "login.g100.cineca.it"
         sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it << 'EOF'
         ls
         rm -rf sweng_proj_pt2
