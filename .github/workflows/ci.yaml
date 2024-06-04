@@ -58,7 +58,7 @@ jobs:
       id: cache-singularity-bin
       uses: actions/cache@v2
       with:
-        path: /usr/local/bin/singularity
+        path: /usr/local/bin/singularity 
         key: ${{ runner.os }}-singularity-bin-${{ env.VERSION }}
         restore-keys: |
           ${{ runner.os }}-singularity-bin-
