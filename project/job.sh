@@ -5,7 +5,7 @@
 #SBATCH --ntasks=2                                                   # number of tasks
 #SBATCH --ntasks-per-node=2                                        # number of tasks per node
 #SBATCH --time=01:00:00                                              # time (HH:MM:SS)
-#SBATCH --partition=gll_usr_prod                                           # partition
+#SBATCH --partition=g100_usr_prod                                           # partition
 #SBATCH --account=a08trb66                                            # project account
 
 singularity run ../my_project.sif
