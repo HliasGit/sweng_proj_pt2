@@ -68,7 +68,8 @@ jobs:
 
     - name: Build Singularity container
       run: |
-        sudo singularity-3.8.7/builddir/singularity build my_project.sif Singularity.def
+        cd singularity-3.8.7/builddir \
+        && singularity build my_project.sif Singularity.def
     
     
     #- name: SSH to remote server
