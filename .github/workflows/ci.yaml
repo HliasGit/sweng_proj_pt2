@@ -46,7 +46,7 @@ jobs:
       id: cache-singularity
       uses: actions/cache@v2
       with:
-        path: /prova
+        path: /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir
         key: ${{ runner.os }}-singularity-${{ env.VERSION }}
         restore-keys: |
           ${{ runner.os }}-singularity-
@@ -58,15 +58,13 @@ jobs:
         wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
         && sudo tar -xzf singularity-${VERSION}.tar.gz \
         && cd singularity-${VERSION} \
-        && sudo ./mconfig --prefix=/prova\
+        && sudo ./mconfig \
         && sudo make -C builddir \
         && sudo make -C builddir install
-        && pwd
 
     - name: Build Singularity container
       run: |
-        pwd
-        && sudo prova/singularity build my_project.sif Singularity.def
+        sudo prova/singularity build my_project.sif Singularity.def
     
     
     #- name: SSH to remote server
