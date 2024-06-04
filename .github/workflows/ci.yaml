@@ -61,11 +61,7 @@ jobs:
         && sudo ./mconfig \
         && sudo make -C builddir \
         && sudo make -C builddir install
-
-    -name: pwd
-      run: |
-        pwd
-
+        
     - name: Build Singularity container
       run: |
         cd /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir/
