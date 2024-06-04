@@ -64,7 +64,7 @@ jobs:
 
     - name: Build Singularity container
       run: |
-        sudo prova/singularity build my_project.sif Singularity.def
+        sudo singularity build my_project.sif Singularity.def
     
     
     #- name: SSH to remote server
