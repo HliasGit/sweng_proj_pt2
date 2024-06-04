@@ -54,6 +54,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-singularity-
 
+    - name: Cache Singularity bin
+      id: cache-singularity
+      uses: actions/cache@v2
+      with:
+        path: /usr/local/bin/singularity
+        key: ${{ runner.os }}-singularity-bin-${{ env.VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-singularity-bin-
+
     - name: Cache Singularity conf download
       id: cache-singularity-conf
       uses: actions/cache@v2
@@ -64,7 +73,7 @@ jobs:
           ${{ runner.os }}-singularity-conf
           
     # Here we should put two conditions    
-    - if: ${{ steps.cache-singularity.outputs.cache-hit != 'true'}}
+    - if: ${{ steps.cache-singularity.outputs.cache-hit != 'true' && steps.cache-singularity-bin.outputs.cache-hit != 'true' && steps.cache-singularity-conf.outputs.cache-hit != 'true'}}
       name: Install Singularity (use cached download if available)
       run: |
         export VERSION=3.8.7 && # adjust this as necessary 
