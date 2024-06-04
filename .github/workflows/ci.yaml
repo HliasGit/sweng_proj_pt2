@@ -64,6 +64,9 @@ jobs:
 
     - name: Check Singularity version
       run: |
+        ls /home/runner/work/sweng_proj_pt2/sweng_proj_pt2 \
+        ls /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7 \
+        ls /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir \
         sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity --version
 
     - name: Build Singularity container
