@@ -8,4 +8,4 @@
 #SBATCH --partition=g100_usr_prod                                   # partition
 #SBATCH --account=tra24_sepolimi                                    # project account
 
-singularity run ../my_project.sif
+singularity run ../cluster_project.sif
