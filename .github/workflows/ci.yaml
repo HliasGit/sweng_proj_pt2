@@ -29,7 +29,10 @@ jobs:
             sshpass 
 
     - name: Setup CMake
-      uses: jwlawson/actions-setup-cmake@v1
+      uses: jwlawson/actions-setup-cmake@v17
+
+    - name: Setup backup workaround for sudo
+      run: sudo chown root:wheel /bin/tar && sudo chmod u+s/bin/tar 
 
     - name: Build project
       run: |
