@@ -55,7 +55,7 @@ jobs:
           ${{ runner.os }}-singularity-
 
     - name: Cache Singularity bin
-      id: cache-singularity
+      id: cache-singularity-bin
       uses: actions/cache@v2
       with:
         path: /usr/local/bin/singularity
