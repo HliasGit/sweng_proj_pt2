@@ -59,18 +59,17 @@ jobs:
         key: ${{ runner.os }}-singularity-conf-${{ env.VERSION }}
         restore-keys: |
           ${{ runner.os }}-singularity-conf
-
-    - if: ${{ steps.cache-singularity.outputs.cache-hit != 'true' }}
-      - if: ${{ steps.cache-singularity-conf.outputs.cache-hit != 'true' }}
-        name: Install Singularity (use cached download if available)
-        run: |
-          export VERSION=3.8.7 && # adjust this as necessary 
-          wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
-          && sudo tar -xzf singularity-${VERSION}.tar.gz \
-          && cd singularity-${VERSION} \
-          && sudo ./mconfig \
-          && sudo make -C builddir \
-          && sudo make -C builddir install
+          
+    - if: ${{ steps.cache-singularity-conf.outputs.cache-hit != 'true' }} &&  ${{ steps.cache-singularity.outputs.cache-hit != 'true' }}
+      name: Install Singularity (use cached download if available)
+      run: |
+        export VERSION=3.8.7 && # adjust this as necessary 
+        wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
+        && sudo tar -xzf singularity-${VERSION}.tar.gz \
+        && cd singularity-${VERSION} \
+        && sudo ./mconfig \
+        && sudo make -C builddir \
+        && sudo make -C builddir install
 
     - name: Check Singularity version
       run: |
