@@ -56,9 +56,9 @@ jobs:
       uses: actions/cache@v2
       with:
         path: /usr/local/etc/singularity
-        key: ${{ runner.os }}-singularity-${{ env.VERSION }}
+        key: ${{ runner.os }}-singularity-conf-${{ env.VERSION }}
         restore-keys: |
-          ${{ runner.os }}-singularity-
+          ${{ runner.os }}-singularity-conf
 
     - if: ${{ steps.cache-singularity.outputs.cache-hit != 'true' }}
       - if: ${{ steps.cache-singularity-conf.outputs.cache-hit != 'true' }}
