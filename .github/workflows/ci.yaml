@@ -64,11 +64,11 @@ jobs:
 
     - name: Check Singularity version
       run: |
-        sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir/singularity --version
+        sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity --version
 
     - name: Build Singularity container
       run: |
-        sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir/singularity build my_project.sif Singularity.def
+        sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity build my_project.sif Singularity.def
     
     
     #- name: SSH to remote server
