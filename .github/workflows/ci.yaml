@@ -59,8 +59,8 @@ jobs:
         && sudo tar -xzf singularity-${VERSION}.tar.gz \
         && cd singularity-${VERSION} \
         && sudo ./mconfig --prefix=/prova\
-        && sudo make -C builddir \
-        && sudo make -C builddir install
+        && sudo make -C /prova/builddir \
+        && sudo make -C /prova/builddir install
 
     - name: Build Singularity container
       run: |
