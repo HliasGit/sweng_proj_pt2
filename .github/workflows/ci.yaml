@@ -63,7 +63,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-singularity-bin
 
-    - name: Cache Singularity conf download
+    - name: Cache Singularity conf
       id: cache-singularity-conf
       uses: actions/cache@v2
       with:
