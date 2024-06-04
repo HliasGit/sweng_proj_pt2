@@ -85,7 +85,6 @@ jobs:
     #    sbatch sweng_proj_pt2/project/job.sh  
     #    squeue --me
     #    exit      
-    #
 
 
 
