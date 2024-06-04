@@ -62,9 +62,13 @@ jobs:
         && sudo make -C builddir \
         && sudo make -C builddir install
 
+     - name: Check Singularity version
+      run: |
+        sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir/singularity --version
+    
+
     - name: Build Singularity container
       run: |
-        cd ${GITHUB_PATH}
         sudo /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir/singularity build my_project.sif Singularity.def
     
     
