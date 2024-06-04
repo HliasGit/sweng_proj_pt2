@@ -51,7 +51,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-singularity-
 
-    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+    - if: ${{ steps.cache-singularity.outputs.cache-hit != 'true' }}
       name: Install Singularity (use cached download if available)
       run: |
         export VERSION=3.8.7 && # adjust this as necessary 
