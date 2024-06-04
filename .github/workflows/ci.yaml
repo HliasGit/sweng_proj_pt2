@@ -46,7 +46,7 @@ jobs:
       id: cache-singularity
       uses: actions/cache@v2
       with:
-        path: singularity-${VERSION}
+        path: builddir
         key: ${{ runner.os }}-singularity-${{ env.VERSION }}
         restore-keys: |
           ${{ runner.os }}-singularity-
