@@ -44,6 +44,15 @@ jobs:
       run: |
         cd project/build
         ./test_multiplication
+      
+    - name: Cache Singularity
+      id: cache-singularity
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/work/sweng_proj_pt2/sweng_proj_pt2/singularity-3.8.7/builddir
+        key: ${{ runner.os }}-singularity-${{ env.VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-singularity
 
     - name: Cache Singularity libexec
       id: cache-singularity-libexec
@@ -73,7 +82,7 @@ jobs:
           ${{ runner.os }}-singularity-conf
           
     # Here we should put two conditions    
-    - if: ${{ steps.cache-singularity-libexec.outputs.cache-hit != 'true' || steps.cache-singularity-bin.outputs.cache-hit != 'true' || steps.cache-singularity-conf.outputs.cache-hit != 'true'}}
+    - if: ${{ steps.cache-singularity.outputs.cache-hit != 'true' || steps.cache-singularity-libexec.outputs.cache-hit != 'true' || steps.cache-singularity-bin.outputs.cache-hit != 'true' || steps.cache-singularity-conf.outputs.cache-hit != 'true'}}
       name: Install Singularity (use cached download if available)
       run: |
         export VERSION=3.8.7 && # adjust this as necessary 
