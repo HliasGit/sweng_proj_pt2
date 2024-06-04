@@ -73,12 +73,13 @@ jobs:
 
     - name: Check Singularity version
       run: |
-        sudo singularity-3.8.7/builddir/singularity --version \
-        ls /singularity-3.8.7/builddir
+        ls /singularity-3.8.7/builddir \
+        && sudo singularity-3.8.7/builddir/singularity --version
+        
 
     - name: Build Singularity container
       run: |
-        sudo singularity-3.8.7/builddir/singularity build singularity-3.8.7/builddir/my_project.sif singularity-3.8.7/builddir/Singularity.def
+        sudo singularity-3.8.7/builddir/singularity build my_project.sif Singularity.def
     
     
     #- name: SSH to remote server
