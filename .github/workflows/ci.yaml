@@ -128,8 +128,9 @@ jobs:
         rm -rf sweng_proj_pt2
         git clone https://github.com/HliasGit/sweng_proj_pt2.git
         mv cluster_project.sif sweng_proj_pt2/cluster_project.sif
-        chmod +x sweng_proj_pt2/project/job.sh 
-        sbatch sweng_proj_pt2/project/job.sh  
+        cd sweng_proj_pt2/project
+        chmod +x job.sh 
+        sbatch job.sh
         squeue --me
         exit      
         EOF
