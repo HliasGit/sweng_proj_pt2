@@ -43,20 +43,31 @@ jobs:
         ./test_multiplication
 
 
-    - name: Install Singularity
-      run: |
-        export VERSION=3.8.7 && # adjust this as necessary \
-        wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
-        && sudo tar -xzf singularity-${VERSION}.tar.gz \
-        && cd singularity-${VERSION} \
-        && sudo ./mconfig \
-        && sudo make -C builddir \
-        && sudo make -C builddir install
+    - name: Cache Singularity download
+      uses: actions/cache@v2
+      with:
+        path: singularity-${VERSION}
+        key: ${{ runner.os }}-singularity-${{ env.VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-singularity-
 
-    - name: Build Singularity container
+    - name: Install Singularity (use cached download if available)
       run: |
-        sudo singularity build my_project.sif Singularity.def
+        if [ ! -d "singularity-${VERSION}" ]; then
+          export VERSION=3.8.7 && # adjust this as necessary 
+          wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
+          && sudo tar -xzf singularity-${VERSION}.tar.gz \
+          && cd singularity-${VERSION} \
+          && sudo ./mconfig \
+          && sudo make -C builddir \
+          && sudo make -C builddir install
+        fi
 
+    - name: Build Singularity container (use cached image if available)
+      run: |
+        if [ ! -f "my_project.sif" ]; then
+          sudo singularity build my_project.sif Singularity.def
+        fi
     
     - name: SSH to remote server
       env:
