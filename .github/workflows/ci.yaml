@@ -59,12 +59,14 @@ jobs:
         && sudo tar -xzf singularity-${VERSION}.tar.gz \
         && cd singularity-${VERSION} \
         && sudo ./mconfig --prefix=/prova\
-        && sudo make -C /prova/builddir \
-        && sudo make -C /prova/builddir install
+        && sudo make -C builddir \
+        && sudo make -C builddir install
+        && pwd
 
     - name: Build Singularity container
       run: |
-        sudo prova/singularity build my_project.sif Singularity.def
+        pwd
+        && sudo prova/singularity build my_project.sif Singularity.def
     
     
     #- name: SSH to remote server
