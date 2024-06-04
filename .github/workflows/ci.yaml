@@ -66,24 +66,25 @@ jobs:
       run: |
         sudo singularity build my_project.sif Singularity.def
     
-    - name: SSH to remote server
-      env:
-        SSHPASS: ${{ secrets.galileo}}
-      run: |
-        sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it
-        exit
-        ssh-keygen -f "$HOME/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -e scp my_project.sif a08trb66@login.g100.cineca.it:/my_project.sif
-        ssh-keygen -f "$HOME/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it
-        ls
-        rm -rf sweng_proj_pt2
-        git clone https://github.com/HliasGit/sweng_proj_pt2.git
-        mv my_project.sif sweng_proj_pt2/my_project.sif
-        chmod +x sweng_proj_pt2/project/job.sh 
-        sbatch sweng_proj_pt2/project/job.sh  
-        squeue --me
-        exit      
+    
+    #- name: SSH to remote server
+    #  env:
+    #    SSHPASS: ${{ secrets.galileo}}
+    #  run: |
+    #    sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it
+    #    exit
+    #    ssh-keygen -f "$HOME/.ssh/known_hosts" -R "login.g100.cineca.it"
+    #    sshpass -e scp my_project.sif a08trb66@login.g100.cineca.it:/my_project.sif
+    #    ssh-keygen -f "$HOME/.ssh/known_hosts" -R "login.g100.cineca.it"
+    #    sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it
+    #    ls
+    #    rm -rf sweng_proj_pt2
+    #    git clone https://github.com/HliasGit/sweng_proj_pt2.git
+    #    mv my_project.sif sweng_proj_pt2/my_project.sif
+    #    chmod +x sweng_proj_pt2/project/job.sh 
+    #    sbatch sweng_proj_pt2/project/job.sh  
+    #    squeue --me
+    #    exit      
 
 
 
