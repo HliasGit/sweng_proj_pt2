@@ -46,7 +46,7 @@ jobs:
       id: cache-singularity
       uses: actions/cache@v2
       with:
-        path: builddir
+        path: /prova
         key: ${{ runner.os }}-singularity-${{ env.VERSION }}
         restore-keys: |
           ${{ runner.os }}-singularity-
@@ -58,7 +58,7 @@ jobs:
         wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz \
         && sudo tar -xzf singularity-${VERSION}.tar.gz \
         && cd singularity-${VERSION} \
-        && sudo ./mconfig \
+        && sudo ./mconfig --prefix=/prova\
         && sudo make -C builddir \
         && sudo make -C builddir install
 
