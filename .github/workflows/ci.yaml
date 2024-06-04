@@ -117,13 +117,9 @@ jobs:
       env:
         SSHPASS: ${{ secrets.galileo}}
       run: |
-        sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it << 'EOF'
-        exit
-        EOF
-        ssh-keygen -f "$HOME/.ssh/known_hosts" -R "login.g100.cineca.it" 
+        ssh-keyscan -t rsa login.g100.cineca.it >> ~/.ssh/known_hosts
         sshpass -e scp my_project.sif a08trb66@login.g100.cineca.it:/my_project.sif
-        ssh-keygen -f "$HOME/.ssh/known_hosts" -R "login.g100.cineca.it"
-        sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it
+        sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it << 'EOF'
         ls
         rm -rf sweng_proj_pt2
         git clone https://github.com/HliasGit/sweng_proj_pt2.git
@@ -132,5 +128,6 @@ jobs:
         sbatch sweng_proj_pt2/project/job.sh  
         squeue --me
         exit      
+        EOF
 
 
