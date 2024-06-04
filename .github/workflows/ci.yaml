@@ -117,6 +117,8 @@ jobs:
       env:
         SSHPASS: ${{ secrets.galileo}}
       run: |
+        mkdir ~/.ssh
+        chmod 700 ~/.ssh
         ssh-keyscan -t rsa login.g100.cineca.it >> ~/.ssh/known_hosts
         sshpass -e scp my_project.sif a08trb66@login.g100.cineca.it:/my_project.sif
         sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it << 'EOF'
