@@ -131,7 +131,7 @@ jobs:
         chmod +x job.sh 
         sbatch job.sh
         squeue --me
-        sleep(10)
+        sleep 10
         cat cluster_project-out.txt
         cat cluster_project-err.txt
         exit      
