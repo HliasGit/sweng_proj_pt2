@@ -5,16 +5,15 @@
 
 // ######################### Source code of multiplyMatrices in src/matrix_mult
 
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices)
+{
     std::vector<std::vector<int>> A = {
         {1, 2, 3},
-        {4, 5, 6}
-    };
+        {4, 5, 6}};
     std::vector<std::vector<int>> B = {
         {7, 8},
         {9, 10},
-        {11, 12}
-    };
+        {11, 12}};
 
     std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
 
@@ -22,12 +21,10 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices) {
 
     std::vector<std::vector<int>> expected = {
         {58, 64},
-        {139, 154}
-    };
+        {139, 154}};
 
     ASSERT_EQ(C, expected) << "Matrix multiplication test failed! :(((((";
 }
-
 
 /*
 When multiplying a matrix times a matrix with all entries to zero we expect a zero matrix
@@ -46,10 +43,8 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices_zeroMatrixRight)
 
     multiplyMatrices(A, B, C, 2, 3, 2);
     std::vector<std::vector<int>> expected = {
-        {0, 0, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
+        {0, 0},
+        {0, 0}};
 
     ASSERT_EQ(C, expected) << "Matrix multiplication by zero on the right test failed! :(((()";
 }
@@ -71,10 +66,8 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices_zeroMatrixLeft)
 
     multiplyMatrices(A, B, C, 2, 3, 2);
     std::vector<std::vector<int>> expected = {
-        {0, 0, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
+        {0, 0},
+        {0, 0}};
 
     ASSERT_EQ(C, expected) << "Matrix multiplication by zero on the right test failed! :(((()";
 }
@@ -136,7 +129,7 @@ TEST(MatrixMultiplicationTest, TestMultiplyMatrices_squaredMatrix)
         {5, 0},
         {0, 5}};
     std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
-    
+
     multiplyMatrices(A, B, C, 2, 2, 2);
 
     std::vector<std::vector<int>> expected = {
@@ -211,21 +204,18 @@ This test has not been reported in the correct implementation because it is not 
 // make sense. Same reasoning for a test checking that the matrix dimensions are not negative.
 
 // an implementation of the aformeentioned test about dimension compatibility is the one below, though it should expect a custom
-// error (i.e. invalid matrix dimensions, which is not implemented in the multiplyMatrices method) and not a standard out of range
-TEST(MatrixMultiplicationTest, TestMultiplyMatrices_squaredMatrix)
+// error (i.e. invalid matrix dimensions, which is not implemented in the multiplyMatrices method) and not a segmentation fault
+TEST(MatrixMultiplicationTest, TestMultiplyMatrices_invalidDimensionsSegfault)
 {
     std::vector<std::vector<int>> A = {
-        {5, 0},
-        {0, 5},
-        {0, 1}};
+        {5, 0, 1},
+        {0, 5, 0}};
+
     std::vector<std::vector<int>> B = {
         {5, 0},
         {0, 5}};
     std::vector<std::vector<int>> C(2, std::vector<int>(2, 0));
-
-    multiplyMatrices(A, B, C, 2, 2, 2);
-
-    EXPECT_THROW(multiplyMatrices(A, B), std::out_of_range);
+    ASSERT_EXIT((multiplyMatrices(A, B, C, 2, 3, 2), exit(0)), ::testing::KilledBySignal(SIGSEGV), ".*");
 }
 
 int main(int argc, char **argv)
