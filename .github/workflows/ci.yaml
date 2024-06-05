@@ -127,7 +127,7 @@ jobs:
         sshpass -e scp my_project.sif a08trb66@login.g100.cineca.it:cluster_project.sif
         ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
         sshpass -e ssh -o StrictHostKeyChecking=no -tt a08trb66@login.g100.cineca.it << 'EOF'
-        wget https://raw.githubusercontent.com/HliasGit/sweng_proj_pt2/main/project/job.sh
+        wget -O https://raw.githubusercontent.com/HliasGit/sweng_proj_pt2/main/project/job.sh
         chmod +x job.sh 
         sbatch job.sh
         squeue --me
