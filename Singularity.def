@@ -16,23 +16,26 @@ From: ubuntu:22.04
     
     # clone the repository containing the project inside the container
     git clone --recursive https://github.com/HliasGit/sweng_proj_pt2.git /usr/sweng_proj_pt2
+    # build googletest library
     cd /usr/sweng_proj_pt2/project/googletest
     mkdir build
     cd build
     cmake ..
     make
     make install
-
+    
+    # build the files
     cd /usr/sweng_proj_pt2/project
     rm -rf build
     chmod +x build.sh
     ./build.sh
 
+# this step is performed after the container has been built
 %test
     cd /usr/sweng_proj_pt2/project/build
     mpirun -np 2 ./test_multiplication
 
+# this step contains the default commands that are executed every time the container is run
 %runscript
     cd /usr/sweng_proj_pt2/project/
-    # Define the default command to run when the container starts
     mpirun -np 2 build/main

@@ -45,6 +45,7 @@ jobs:
         cd project/build
         ./test_multiplication
       
+    # setup singularity cache to avoid building the container every time
     - name: Cache Singularity
       id: cache-singularity
       uses: actions/cache@v2
@@ -90,8 +91,8 @@ jobs:
         key: ${{ runner.os }}-singularity-conf-${{ env.VERSION }}
         restore-keys: |
           ${{ runner.os }}-singularity-conf
-          
-    # Here we should put two conditions    
+           
+    # install singularity if not present in the cache
     - if: ${{ steps.cache-singularity-var.outputs.cache-hit != 'true' || steps.cache-singularity.outputs.cache-hit != 'true' || steps.cache-singularity-libexec.outputs.cache-hit != 'true' || steps.cache-singularity-bin.outputs.cache-hit != 'true' || steps.cache-singularity-conf.outputs.cache-hit != 'true'}}
       name: Install Singularity (use cached download if available)
       run: |
@@ -107,15 +108,17 @@ jobs:
       run: |
         sudo singularity-3.8.7/builddir/singularity --version
         
-
     - name: Build Singularity container
       run: |
         sudo singularity-3.8.7/builddir/singularity build my_project.sif Singularity.def
     
-    
     - name: SSH to remote server
       env:
         SSHPASS: ${{ secrets.galileo}}
+      # first check that the ~/.ssh folder exists and create it if not. This is necessary in order not to encounter any problem
+      # in the access to Galileo. Then, add the Galileo server to the known hosts file. After that, copy the container to the Galileo server
+      # and run the job.sh script that will submit the job to the Galileo server. Finally, print the queue of the jobs that are running 
+      # on the Galileo cluster.
       run: |
         mkdir ~/.ssh
         chmod 700 ~/.ssh

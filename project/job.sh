@@ -10,4 +10,5 @@
 #SBATCH -o %x-%j-out.txt                                            # output file name
 #SBATCH -e %x-%j-err.txt                                            # error file name
 
+# the flag -C allows execution without super user permission thanks to the setting of environment and file system
 singularity run -C cluster_project.sif 
